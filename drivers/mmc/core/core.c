@@ -2510,8 +2510,9 @@ static int mmc_rescan_try_freq(struct mmc_host *host, unsigned freq)
 	 * Skip it if we already know that we do not support SDIO commands
 	 */
 	if (!(host->caps2 & MMC_CAP2_NO_SDIO))
+#ifndef CONFIG_MMC_WH
 		sdio_reset(host);
-
+#endif
 	mmc_go_idle(host);
 
 	if (!(host->caps2 & MMC_CAP2_NO_SD))

@@ -945,3 +945,20 @@ config MMC_SDHCI_OMAP
 	  If you have a controller with this interface, say Y or M here.
 
 	  If unsure, say N.
+
+config MMC_WH
+        tristate "UCTECHIP WH MMC CONTROLLER support"
+        depends on ARCH_RV32I || ARCH_RV64I
+        help
+          This driver is for UCTECHIP WH SoC's mmc.
+          Say 'Y' here if you wish to use the on-board mmc port.
+          Otherwise, say 'N'.
+
+config MMC_WH_PIO
+        tristate "UCTECHIP WH MMC CONTROLLER use PIO transfers only"
+        depends on MMC_WH
+        help
+          Use PIO to transfer data between memory and the hardware.
+          PIO is slower than DMA as it requires CPU instructions to
+          move the data. This has been the traditional default for
+          the WH-MMC driver.

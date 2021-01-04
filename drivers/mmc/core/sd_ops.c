@@ -273,9 +273,13 @@ int mmc_app_send_scr(struct mmc_card *card)
 
 	mmc_wait_for_req(card->host, &mrq);
 
+#ifdef CONFIG_MMC_WH
+        card->raw_scr[0] = 0x02358003;
+        card->raw_scr[1] = 0x00000000;
+#else
 	card->raw_scr[0] = be32_to_cpu(scr[0]);
 	card->raw_scr[1] = be32_to_cpu(scr[1]);
-
+#endif
 	kfree(scr);
 
 	if (cmd.error)
