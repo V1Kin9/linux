@@ -1517,6 +1517,25 @@ config SERIAL_OWL_CONSOLE
 	  Say 'Y' here if you wish to use Actions Semiconductor S500/S900 UART
 	  as the system console.
 
+config SERIAL_WH
+        tristate "UCTECHIP WH serial port support"
+        depends on ARCH_RV32I || ARCH_RV64I
+        select SERIAL_CORE
+        help
+          This driver is for UCTECHIP WH SoC's UART.
+          Say 'Y' here if you wish to use the on-board serial port.
+          Otherwise, say 'N'.
+
+config SERIAL_WH_CONSOLE
+        bool "Console on UCTECHIP WH serial port"
+        depends on SERIAL_WH=y
+        select SERIAL_CORE_CONSOLE
+        select SERIAL_EARLYCON
+        default y
+        help
+          Say 'Y' here if you wish to use UCTECHIP WH UART
+          as the system console.
+
 config SERIAL_RDA
 	bool "RDA Micro serial port support"
 	depends on ARCH_RDA || COMPILE_TEST
