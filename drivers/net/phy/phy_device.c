@@ -889,7 +889,7 @@ int phy_init_hw(struct phy_device *phydev)
 
 	if (!phydev->drv || !phydev->drv->config_init)
 		return 0;
-
+#ifndef CONFIG_SERIAL_WH
 	if (phydev->drv->soft_reset)
 		ret = phydev->drv->soft_reset(phydev);
 	else
@@ -897,7 +897,7 @@ int phy_init_hw(struct phy_device *phydev)
 
 	if (ret < 0)
 		return ret;
-
+#endif
 	ret = phy_scan_fixups(phydev);
 	if (ret < 0)
 		return ret;
